@@ -8,7 +8,6 @@ const Home = () => {
     useEffect(() => {
         if (storedUserInfo.includes("username")) {
             const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
-            console.log(userInfo);
             setuserName(userInfo.username)
         }
     }, [storedUserInfo]);
