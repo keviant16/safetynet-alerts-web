@@ -2,17 +2,20 @@ import { Table } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import PersonRow from "../../Rows/PersonRow/PersonRow";
+import { useNavigate } from "react-router-dom";
 
 const baseUrl = "http://localhost:8080/person"
 
 const PersonTable = () => {
   const [personsList, setpersonsList] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
       setpersonsList(response.data);
-    });
-  }, []);
+    }).catch(error => error.response.status === 401 && navigate("/unauthorize"))
+  }, [navigate]);
 
 
 

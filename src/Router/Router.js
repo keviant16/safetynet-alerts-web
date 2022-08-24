@@ -4,6 +4,7 @@ import Layout from "../Components/Layout/Layout";
 import Alerts from "../Pages/Alerts/Alerts";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Unauthorize from "../Pages/Unauthorize/Unauthorize";
 
 const Home = lazy(() => import('../Pages/Home/Home'))
 const Person = lazy(() => import('../Pages/Person/Person'))
@@ -27,6 +28,7 @@ const Router = () => {
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="*" element={<NoPage />} />
+                        <Route path="/unauthorize" element={<Unauthorize />} />
                     </Route>
                 </Routes>
             </Suspense>

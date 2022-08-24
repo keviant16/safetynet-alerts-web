@@ -47,7 +47,6 @@ const EditFireStation = (props) => {
             const persons = response.data
             const addresArr = persons.map((p) => p.address)
             const addressArrFilter = addresArr.filter((item, index) => addresArr.indexOf(item) === index)
-            console.log({ persons })
 
             setaddresses(addressArrFilter);
         });
@@ -55,7 +54,7 @@ const EditFireStation = (props) => {
         axios.get(`${baseURL}/fireStation/${props.id}`).then((response) => {
             setfireStation(response.data);
         });
-    }, []);
+    }, [props.id]);
 
     if (!fireStation) return "... Loading";
 
