@@ -15,6 +15,7 @@ const MainNav = () => {
                     <Link className="m-1" to="/medicalRecords">Dossiers Médicaux</Link>
                     <Link className="m-1" to="/fireStations">Stations Pompier</Link>
                     <Link className="m-1" to="/register">S'inscrire</Link>
+                    <Link className="m-1" to="/login">Se Connecter</Link>
                 </Nav>
             </Container>
         </Navbar >
