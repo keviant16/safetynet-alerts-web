@@ -4,7 +4,7 @@ import MainNav from "../Navs/MainNav/MainNav";
 
 const Layout = () => {
     return (
-        <Container>
+        <Container >
             <MainNav />
             <hr />
             <Outlet />

@@ -9,7 +9,7 @@ const InputSelect = (props) => {
                 name={props.name}
                 value={props.value}
                 onChange={props.handleChange}
-                required
+                required={props.required}
             >
                 <option>Open this select menu</option>
                 {props.options.map((option, index) => <option key={index}>{option}</option>)}
