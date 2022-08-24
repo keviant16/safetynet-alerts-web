@@ -1,19 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import FireStationRow from "../../Rows/FireStationRow/FireStationRow";
 
 const baseUrl = "http://localhost:8080/fireStation"
 
 
 const FireStationTable = () => {
+    const navigate = useNavigate();
+
     const [fireStationList, setfireStationList] = useState([]);
 
     useEffect(() => {
         axios.get(baseUrl).then((response) => {
             setfireStationList(response.data);
-        });
-    }, []);
+        }).catch(error => error.response.status === 401 && navigate("/unauthorize"));
+    }, [navigate]);
 
     return (
         <Table responsive>

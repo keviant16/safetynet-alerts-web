@@ -18,7 +18,6 @@ const Login = () => {
 
     const loginUser = (login) => {
         axios.post(baseURL, login)
-            .then(res => console.log(res))
             .then(() => alert("Login"))
             .then(() => navigate('/'))
     }
