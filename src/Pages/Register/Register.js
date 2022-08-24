@@ -37,10 +37,7 @@ const Register = () => {
 
     const loginUser = (login) => {
         axios.post(baseURL + "/signin", login)
-            .then(res => console.log(res.data))
-        // .then(res => localStorage.setItem("userInfo", res?.data))
-        // .then(res => localStorage.setItem("snaCookieName", res))//set cookie
-        //set user and token
+            .then(res => window.localStorage.setItem('userInfo', JSON.stringify(res?.data)))
     }
 
 
