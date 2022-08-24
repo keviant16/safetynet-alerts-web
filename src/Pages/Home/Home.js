@@ -2,15 +2,21 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
 const Home = () => {
-    const [userName, setuserName] = useState(null);
-    const userInfo = localStorage
-    console.log({ userInfo });
+    const [username, setuserName] = useState(null)
+    const storedUserInfo = window.localStorage.getItem('userInfo')
+
     useEffect(() => {
-        setuserName("name")
-    }, []);
+        if (storedUserInfo.includes("username")) {
+            const userInfo = JSON.parse(window.localStorage.getItem('userInfo'))
+            setuserName(userInfo.username)
+        }
+    }, [storedUserInfo]);
+
+
+
     return (
         <Container>
-            <h1>Home {userName && userName}</h1>
+            <h1>Home {username && username}</h1>
         </Container>
     );
 }
