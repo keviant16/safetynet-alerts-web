@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../Components/Layout/Layout";
 import Alerts from "../Pages/Alerts/Alerts";
+import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 
 const Home = lazy(() => import('../Pages/Home/Home'))
@@ -24,6 +25,7 @@ const Router = () => {
                         <Route path="medicalRecords" element={<MedicalRecord />} />
                         <Route path="fireStations" element={<FireStation />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/login" element={<Login />} />
 
                         <Route path="*" element={<NoPage />} />
                     </Route>
