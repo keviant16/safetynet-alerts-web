@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { Container, Form, Card, Button, Stack } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 import InputText from "../../Components/Inputs/InputText/InputText";
 import axios from "axios";
-import InputSelect from "../../Components/Inputs/InputSelect/InputSelect";
-import Checkbox from "../../Components/Inputs/Checkbox/Checkbox";
-
+import { Container, Form, Card, Button, Stack } from "react-bootstrap";
 
 const baseURL = "http://localhost:8080/api/auth/signin"
 
@@ -16,15 +14,13 @@ const initialLogin = {
 const Login = () => {
     const [login, setLogin] = useState(initialLogin);
     const [valid, setvalid] = useState(false);
-
+    const navigate = useNavigate();
 
     const loginUser = (login) => {
         axios.post(baseURL, login)
             .then(res => console.log(res))
             .then(() => alert("Login"))
-            .then(() => <Redirect to="/home" />)
-
-        //redirect to person
+            .then(() => navigate('/'))
     }
 
     const handleSubmit = (event) => {

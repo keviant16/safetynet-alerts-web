@@ -26,7 +26,6 @@ const Router = () => {
                         <Route path="fireStations" element={<FireStation />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
-
                         <Route path="*" element={<NoPage />} />
                     </Route>
                 </Routes>
