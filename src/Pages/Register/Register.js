@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Container, Form, Card, Button, Stack } from "react-bootstrap";
+import { Container, Form, Card, Button, Stack, Spinner } from "react-bootstrap";
 import InputText from "../../Components/Inputs/InputText/InputText";
 import axios from "axios";
-import InputSelect from "../../Components/Inputs/InputSelect/InputSelect";
 import Checkbox from "../../Components/Inputs/Checkbox/Checkbox";
+import { useNavigate } from 'react-router-dom';
 
 
-const baseURL = "http://localhost:8080/api/auth/signup"
+const baseURL = "http://localhost:8080/api/auth"
 
 const initialRegister = {
     username: "",
@@ -18,15 +18,31 @@ const initialRegister = {
 const Register = () => {
     const [register, setregister] = useState(initialRegister);
     const [valid, setvalid] = useState(false);
-
+    const [loading, setloading] = useState(false);
+    const navigate = useNavigate();
 
     const registerUser = (register) => {
-        axios.post(baseURL, register)
-            .then(res => console.log(res))
-            .then(() => alert("register"))
-        //login
-        //redirect to person
+        setloading(true)
+        const loginData = {
+            username: register.username,
+            password: register.password
+        }
+        axios.post(baseURL + "/signup", register)
+            .then(() => loginUser(loginData))
+            .then(() => setloading(false))
+            .then(() => alert("Register and Login !"))
+            .then(() => navigate('/'))
     }
+
+
+    const loginUser = (login) => {
+        axios.post(baseURL + "/signin", login)
+            .then(res => console.log(res.data))
+        // .then(res => localStorage.setItem("userInfo", res?.data))
+        // .then(res => localStorage.setItem("snaCookieName", res))//set cookie
+        //set user and token
+    }
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -44,16 +60,23 @@ const Register = () => {
     }
 
     const handleChange = (event) => {
-        setregister((prev) => ({ ...prev, [event.target.name]: event.target.value }))
+        if (event.target.name === "roles") {
+            setregister((prev) => ({ ...prev, [event.target.name]: !register.roles }))
+
+        } else {
+            setregister((prev) => ({ ...prev, [event.target.name]: event.target.value }))
+        }
     }
+
 
     return (
         <Container style={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
 
             <Card border="primary" style={{ minWidth: "600px", padding: 20 }}>
-                <Stack>
-                    <Card.Title>S'incrire</Card.Title>
-                </Stack>
+
+                <Card.Title>S'incrire</Card.Title>
+
+
                 <Card.Body>
                     <Form noValidate onSubmit={handleSubmit} validated={valid} >
                         <InputText
@@ -85,7 +108,23 @@ const Register = () => {
                             handleChange={handleChange}
                             label="S'inscrire en tant que representant d'une station de pompier"
                         />
-                        <Button type="submit">S'incrire</Button>
+
+                        <Stack direction="horizontal" gap={3}>
+                            <Button type="submit">S'incrire </Button>
+
+                            {loading &&
+                                <>
+                                    <Spinner animation="border" role="status" className="ms-auto">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </Spinner>
+                                    <span >Loading...</span>
+                                </>
+                            }
+
+
+                        </Stack>
+
+
                     </Form>
                 </Card.Body>
             </Card>
